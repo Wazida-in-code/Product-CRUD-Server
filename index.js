@@ -31,6 +31,11 @@ app.post('/products', async(req, res) => {
     res.send(result)
 })
 
+app.get('/products', async(req, res) => {
+    const result = await productCollection.find().toArray()
+    res.send(result)
+})
+
 // to get something on http://localhost:8000/
 app.get('/', (req, res) => {
     // res.send('Server is running!')
