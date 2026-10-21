@@ -1,11 +1,26 @@
 import express from 'express'
-
+import { MongoClient } from 'mongodb';
+import 'dotenv/config'
 const app = express();
-
 const PORT = 8000;
 
-// to get something on localhost:8000
 
+// This code is from Mongodb
+const client = new MongoClient(process.env.MONGODB_URI);
+
+export async function connectToMongoDB() {
+  try {
+    await client.connect();
+    console.log("You successfully connected to MongoDB!");
+    return client;
+  } catch (err) {
+    console.dir(err);
+  }
+}
+connectToMongoDB()
+
+
+// to get something on localhost:8000
 app.get('/', (req, res) => {
     // res.send('Server is running!')
     res.send({msg: 'server is running!'})
