@@ -44,6 +44,17 @@ app.get('/products/:id', async (req, res) => {
 })
 
 
+app.patch('/products/:id', async(req, res) => {
+  const data = req.body
+  const {id} = req.params
+  const result = await productCollection.updateOne(
+    {_id: new ObjectId(id)}, 
+    {$set: data}
+  )
+  res.send(result)
+})
+
+
 // to get something on http://localhost:8000/
 app.get('/', (req, res) => {
     // res.send('Server is running!')
