@@ -55,6 +55,13 @@ app.patch('/products/:id', async(req, res) => {
 })
 
 
+app.delete('/products/:id', async(req, res) => {
+  const {id} = req.params
+  const result = await productCollection.deleteOne({_id: new ObjectId(id)})
+  res.json(result)
+})
+
+
 // to get something on http://localhost:8000/
 app.get('/', (req, res) => {
     // res.send('Server is running!')
