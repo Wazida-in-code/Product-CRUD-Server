@@ -1,5 +1,5 @@
 import express from 'express'
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 import cors from 'cors'
 import 'dotenv/config'
 const app = express();
@@ -35,6 +35,14 @@ app.get('/products', async(req, res) => {
     const result = await productCollection.find().toArray()
     res.send(result)
 })
+
+
+app.get('/products/:id', async (req, res) => {
+  const {id} = req.params
+  const result = await productCollection.findOne({_id: new ObjectId(id)})
+  res.send({result})
+})
+
 
 // to get something on http://localhost:8000/
 app.get('/', (req, res) => {
